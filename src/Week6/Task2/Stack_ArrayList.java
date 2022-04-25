@@ -1,6 +1,6 @@
 package Week6.Task2;
 
-public class Stack_ArrayList<T> {
+public class Stack_ArrayList<T> implements AutoCloseable{
     private T[] stack;
     private final int MAXSIZE = 5;
     private int actualSize;
@@ -38,5 +38,11 @@ public class Stack_ArrayList<T> {
     @Override
     public String toString() {
         return "stack=" + stack.toString();
+    }
+
+    @Override
+    public void close() throws Exception {
+        stack = (T[]) new Object[MAXSIZE];
+        System.out.println("the stack has been emptied by the close()");
     }
 }
