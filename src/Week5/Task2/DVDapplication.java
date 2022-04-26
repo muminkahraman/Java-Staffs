@@ -210,7 +210,7 @@ public class DVDapplication {
             System.out.printf(titles[i], DVDCollection[i].size());
             printCollection(DVDCollection[i]);
         }
-        System.out.println("\nDVD ArrayDeque - (" + arrayDeque.size() + " entries)");
+        System.out.println("\nDVD ArrayDeque back to front - (" + arrayDeque.size() + " entries)");
         while (!arrayDeque.isEmpty()){
             try {
                 System.out.println("\t" + arrayDeque.popRear());
