@@ -14,7 +14,7 @@ public class SalaryApplication {
     public static void main(String[] args) {
         ArrayList<Employee> employees = new ArrayList<Employee>();
 
-        String path = "src/Week8/Task3/source_file.json";
+        String path = "src/Week8/Task4/source_file.json";
 
         System.out.println("\nEmployees Sorted:");
         Stream<Employee> employeeStream = employees.stream();
@@ -22,6 +22,11 @@ public class SalaryApplication {
         readTeamFromJsonFile(path, employees);
         employeeStream
                 .sorted()
+                .forEach(element -> System.out.println(element));
+        System.out.println("\nDistinct Salaries");
+        employees.stream()
+                .map(element -> element.getSalary())
+                .distinct()
                 .forEach(element -> System.out.println(element));
     }
 
