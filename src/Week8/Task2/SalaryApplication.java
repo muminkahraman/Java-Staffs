@@ -1,7 +1,5 @@
 package Week8.Task2;
 
-import Week8.Task1.Person;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -13,7 +11,7 @@ public class SalaryApplication {
         ArrayList<Employee> employees = new ArrayList<Employee>();
         addEmployees(employees);
 
-        System.out.println("\nSack Race Pupils :");
+        System.out.println("\nSorted employees :");
         Stream<Employee> employeeStream = employees.stream();
 
         employeeStream
