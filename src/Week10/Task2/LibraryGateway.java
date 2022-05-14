@@ -2,11 +2,14 @@ package Week10.Task2;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LibraryGateway
 {
 
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/javaprogramming_efrei";
+    private static final String INSERT_CUSTOMER = "INSERT INTO customer(name, lastname) Values (?, ?)";
+    private static final String DELETE_ALL_CUSTOMERS = "DELETE FROM customer";
     private static final String SELECT_ALL_CUSTOMERS = "SELECT * FROM customer";
 
 
@@ -53,6 +56,42 @@ public class LibraryGateway
         catch (SQLException | EmptyStringException e)
         {
             throw new RuntimeException("Problem loading customers", e);
+        }
+    }
+
+    public void saveCustomers(ArrayList<Customer> customers)
+    {
+        try (Connection conn = getConnection())
+        {
+            deleteAllCustomers(conn);
+            customers.forEach(b -> saveCustomer(b, conn));
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException("There was a problem with the database when saving books", e);
+        }
+    }
+
+    private void deleteAllCustomers(Connection conn) throws SQLException
+    {
+
+        PreparedStatement stmt = conn.prepareStatement(DELETE_ALL_CUSTOMERS);
+        stmt.executeUpdate();
+        stmt.close();
+    }
+
+    private void saveCustomer(Customer b, Connection conn)
+    {
+        try (PreparedStatement stmt = conn.prepareStatement(INSERT_CUSTOMER))
+        {
+            stmt.setInt(1, b.getIdcustomer());
+            stmt.setString(2, b.getName());
+            stmt.setString(3, b.getLastname());
+            stmt.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException("Customer not inserted", e);
         }
     }
 }

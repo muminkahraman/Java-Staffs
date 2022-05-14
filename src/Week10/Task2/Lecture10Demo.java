@@ -3,11 +3,13 @@ package Week10.Task2;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Lecture10Demo
 {
 
     private static final int VIEW_LIST_OF_CUSTOMERS = 1;
+    private static final int CREATE_A_NEW_CUSTOMER = 2;
     private static final int EXIT = 6;
 
     private static final Scanner kybd = new Scanner(System.in);
@@ -28,18 +30,23 @@ public class Lecture10Demo
                 case VIEW_LIST_OF_CUSTOMERS:
                     viewListOfCustomers();
                     break;
+                case CREATE_A_NEW_CUSTOMER:
+                    createCustomer();
+                    break;
                 default:
                     System.out.println("\nERROR: Choice not recognised");
             }
             displayMenu();
             choice = getMenuChoice();
         }
+        saveCustomersToDatabase();
     }
 
     private static void displayMenu()
     {
         System.out.println("\n");
         System.out.println(VIEW_LIST_OF_CUSTOMERS + ". View list of customers");
+        System.out.println(CREATE_A_NEW_CUSTOMER + ". Create a new customer");
         System.out.println(EXIT + ". Exit");
     }
 
@@ -110,6 +117,43 @@ public class Lecture10Demo
         try
         {
             customers = new LibraryGateway().loadCustomers();
+        }
+        catch (Exception e)
+        {
+            System.out.println("ERROR: " + e.getMessage());
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private static void createCustomer()
+    {
+        int idcustomer = inputInteger("\nidcustomer: > ");
+        String name = inputString("name: > ");
+        String lastname = inputString("lastname: > ");
+
+        try
+        {
+            Customer b = new Customer(idcustomer, name, lastname);
+
+            customers.add(b);
+        }
+        catch (EmptyStringException e)
+        {
+            System.out.println("\nERROR: " + e.getMessage());
+        }
+    }
+
+    private static String inputString(String prompt)
+    {
+        System.out.println(prompt);
+        return kybd.nextLine();
+    }
+
+    private static void saveCustomersToDatabase()
+    {
+        try
+        {
+            new LibraryGateway().saveCustomers(customers);
         }
         catch (Exception e)
         {
