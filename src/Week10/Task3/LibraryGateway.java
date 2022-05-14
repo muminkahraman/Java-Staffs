@@ -1,8 +1,7 @@
-package Week10.Task2;
+package Week10.Task3;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class LibraryGateway
 {
@@ -11,7 +10,6 @@ public class LibraryGateway
     private static final String INSERT_CUSTOMER = "INSERT INTO customer(idcustomer, name, lastname) Values (?, ?, ?)";
     private static final String DELETE_ALL_CUSTOMERS = "DELETE FROM customer";
     private static final String SELECT_ALL_CUSTOMERS = "SELECT * FROM customer";
-
 
     private Connection getConnection() throws SQLException
     {
@@ -94,4 +92,5 @@ public class LibraryGateway
             throw new RuntimeException("Customer not inserted", e);
         }
     }
+
 }

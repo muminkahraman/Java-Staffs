@@ -1,15 +1,15 @@
-package Week10.Task2;
+package Week10.Task3;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class Lecture10Demo
 {
 
     private static final int VIEW_LIST_OF_CUSTOMERS = 1;
     private static final int CREATE_A_NEW_CUSTOMER = 2;
+    private static final int DELETE_A_CUSTOMER = 3;
     private static final int EXIT = 6;
 
     private static final Scanner kybd = new Scanner(System.in);
@@ -33,6 +33,9 @@ public class Lecture10Demo
                 case CREATE_A_NEW_CUSTOMER:
                     createCustomer();
                     break;
+                case DELETE_A_CUSTOMER:
+                    deleteCustomer();
+                    break;
                 default:
                     System.out.println("\nERROR: Choice not recognised");
             }
@@ -47,6 +50,7 @@ public class Lecture10Demo
         System.out.println("\n");
         System.out.println(VIEW_LIST_OF_CUSTOMERS + ". View list of customers");
         System.out.println(CREATE_A_NEW_CUSTOMER + ". Create a new customer");
+        System.out.println(DELETE_A_CUSTOMER + ". Delete a customer");
         System.out.println(EXIT + ". Exit");
     }
 
@@ -161,5 +165,25 @@ public class Lecture10Demo
             System.out.println("ERROR: " + e.getMessage());
             e.printStackTrace(System.out);
         }
+    }
+
+    private static void deleteCustomer (){
+        int idcustomer = inputInteger("\nidcustomer to delete: > ");
+
+        try
+        {
+            for (int i = 0; i < customers.size(); i++) {
+                if(customers.get(i).getIdcustomer()==idcustomer){
+                    customers.remove(i);
+                }
+            }
+            System.out.println("Customer Deleted");
+        }
+        catch (Exception e)
+        {
+            System.out.println("ERROR: " + e.getMessage());
+            e.printStackTrace(System.out);
+        }
+        saveCustomersToDatabase();
     }
 }
