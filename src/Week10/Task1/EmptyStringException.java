@@ -1,4 +1,4 @@
-package Week10;
+package Week10.Task1;
 
 public class EmptyStringException extends Exception
 {

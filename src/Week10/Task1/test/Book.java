@@ -1,4 +1,4 @@
-package Week10;
+package Week10.Task1.test;
 
 import java.io.Serializable;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package Week10;
+package Week10.Task1.test;
 
 public class CopyNotFoundException extends Exception
 {

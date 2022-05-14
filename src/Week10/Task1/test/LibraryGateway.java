@@ -1,4 +1,4 @@
-package Week10;
+package Week10.Task1.test;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class LibraryGateway
 {
 
-    private static final String DATABASE_URL = "jdbc:derby://localhost:1527/JavaProgramming_EFREI";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/javaprogramming_efrei";
     private static final String DELETE_ALL_BOOKS = "DELETE FROM Book";
     private static final String DELETE_ALL_COPIES = "DELETE FROM Copy";
     private static final String INSERT_BOOK = "INSERT INTO Book(title, author, ISBN) Values (?, ?, ?)";
@@ -20,7 +20,7 @@ public class LibraryGateway
         DriverManager.registerDriver(
                 new org.apache.derby.jdbc.ClientDriver());
 
-        return DriverManager.getConnection(DATABASE_URL, "gdm1", "gdm1");
+        return DriverManager.getConnection(DATABASE_URL, "root", "mumin1999.");
     }
 
     public ArrayList<Book> loadBooks()
