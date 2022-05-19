@@ -1,0 +1,26 @@
+drop table Player;
+drop table Club;
+
+create table Club (
+club_id integer primary key 
+        generated always as identity
+        (start with 1, increment by 1),
+clubName varchar(20) not null unique
+);
+
+create table Player (
+player_id integer primary key 
+          generated always as identity 
+          (start with 1, increment by 1),
+playerName varchar(20) not null,
+club_id integer constraint club_fk references Club(club_id)
+);
+
+INSERT INTO Club (clubName) VALUES ('A-Team');
+INSERT INTO Club (clubName) VALUES ('R-Team');
+INSERT INTO Club (clubName) VALUES ('B-Team');
+
+INSERT INTO Player (playerName, club_id) VALUES ('Jack', 2);
+INSERT INTO Player (playerName) VALUES ('Jill');
+INSERT INTO Player (playerName, club_id) VALUES ('Rosy', 1);
+INSERT INTO Player (playerName, club_id) VALUES ('Jim', 1);
