@@ -1,0 +1,13 @@
+package Week2.Task4.Task4L;
+
+public class CardApplication {
+
+    public static void main(String[] args) {
+        
+        Deck D1 = new Deck() ;
+        Card[] cards = new Card[52];
+
+        D1.deckIerator();
+
+    }
+}
